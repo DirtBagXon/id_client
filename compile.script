@@ -1,0 +1,7 @@
+#!/bin/bash
+
+rm -f idclient
+
+glib-compile-resources --target=idResource.c --generate-source resource.xml
+
+gcc -o idclient id.c util.c idResource.c -lm `pkg-config --cflags --libs gtk+-3.0` -export-dynamic

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="id">
+    <file preprocess="xml-stripblanks">id.glade</file>
+    <file>css/main.css</file>
+    <file>images/background.jpg</file>
+    <file>images/doom.jpg</file>
+    <file>images/doom2.jpg</file>
+    <file>images/doom3.jpg</file>
+    <file>images/quake.jpg</file>
+    <file>images/doom3classic.jpg</file>
+    <file>images/doom3roe.jpg</file>
+    <file>images/plutonia.jpg</file>
+    <file>images/tnt.jpg</file>
+    <file>images/quakearmagon.jpg</file>
+    <file>images/quakedoe.jpg</file>
+    <file>images/quakedop.jpg</file>
+    <file>images/logo.jpg</file>
+  </gresource>
+</gresources>
+

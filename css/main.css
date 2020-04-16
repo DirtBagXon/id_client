@@ -1,0 +1,8 @@
+#logo_button{
+  color: black;
+  box-shadow: none;
+  border-color: black;
+  background-color: black;
+  background: rgba(169,3,41,1);
+  background: radial-gradient(ellipse at center, rgba(169,3,41,1) 8%, rgba(169,3,41,1) 12%, rgba(143,2,34,1) 23%, rgba(13,2,0,1) 63%, rgba(13,2,0,1) 83%);
+}
