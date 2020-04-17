@@ -54,6 +54,9 @@ GtkWidget       *quake;
 GtkWidget       *quakearmagon;
 GtkWidget       *quakedoe;
 GtkWidget       *quakedop;
+GtkWidget       *quake2;
+GtkWidget       *quake2reckon;
+GtkWidget       *quake2zero;
 
 static gboolean window_background(GtkWidget *widget, cairo_t *cr, gpointer data);
 void	on_destroy();
@@ -61,7 +64,7 @@ void	image_overlay();
 void	run_game(char *GAME);
 char	binary[64] = BINARY_DOOM;
 char	home[128] = HOME_DOOM;
-char	arguments[64] = ARGS_DOOM;
+char	arguments[96] = ARGS_DOOM;
 
 
 GtkWidget * init_tree()
@@ -91,6 +94,12 @@ GtkWidget * init_tree()
 	gtk_list_store_set(liststore, &treeiter, 0, NAME_QUAKEM2, -1);
 	gtk_list_store_append(liststore, &treeiter);
 	gtk_list_store_set(liststore, &treeiter, 0, NAME_QUAKEM3, -1);
+	gtk_list_store_append(liststore, &treeiter);
+	gtk_list_store_set(liststore, &treeiter, 0, NAME_QUAKE2, -1);
+	gtk_list_store_append(liststore, &treeiter);
+	gtk_list_store_set(liststore, &treeiter, 0, NAME_QUAKE2M1, -1);
+	gtk_list_store_append(liststore, &treeiter);
+	gtk_list_store_set(liststore, &treeiter, 0, NAME_QUAKE2M2, -1);
 
 	GtkWidget *treeview = gtk_tree_view_new_with_model(GTK_TREE_MODEL(liststore));
 	GtkCellRenderer *cellrenderertext = gtk_cell_renderer_text_new();
@@ -160,6 +169,21 @@ static void selected(GtkTreeView *tree_view, GtkTreePath *path, GtkTreeViewColum
 		sprintf(home, HOME_QUAKEM3);
 		sprintf(arguments, ARGS_QUAKEM3);
 		graphic = quakedop;
+	} else if (strcmp(string, NAME_QUAKE2) == 0) {
+		sprintf(binary, BINARY_QUAKE2);
+		sprintf(home, HOME_QUAKE2);
+		sprintf(arguments, ARGS_QUAKE2);
+		graphic = quake2;
+	} else if (strcmp(string, NAME_QUAKE2M1) == 0) {
+		sprintf(binary, BINARY_QUAKE2M1);
+		sprintf(home, HOME_QUAKE2M1);
+		sprintf(arguments, ARGS_QUAKE2M1);
+		graphic = quake2reckon;
+	} else if (strcmp(string, NAME_QUAKE2M2) == 0) {
+		sprintf(binary, BINARY_QUAKE2M2);
+		sprintf(home, HOME_QUAKE2M2);
+		sprintf(arguments, ARGS_QUAKE2M2);
+		graphic = quake2zero;
 	} else {
 		sprintf(binary, BINARY_DOOM);
 		sprintf(home, HOME_DOOM);
@@ -174,6 +198,9 @@ void	image_overlay()
 {
 	// Reverse order of init_tree()
 	// top image goes last..
+	quake2zero = gtk_image_new_from_resource("/id/images/quake2zero.jpg");
+	quake2reckon = gtk_image_new_from_resource("/id/images/quake2reckon.jpg");
+	quake2 = gtk_image_new_from_resource("/id/images/quake2.jpg");
 	quakedop = gtk_image_new_from_resource("/id/images/quakedop.jpg");
 	quakedoe = gtk_image_new_from_resource("/id/images/quakedoe.jpg");
 	quakearmagon = gtk_image_new_from_resource("/id/images/quakearmagon.jpg");
@@ -186,6 +213,9 @@ void	image_overlay()
 	doom2 = gtk_image_new_from_resource("/id/images/doom2.jpg");
 	doom = gtk_image_new_from_resource("/id/images/doom.jpg");
 
+	gtk_overlay_add_overlay (GTK_OVERLAY (imageoverlay), quake2zero);
+	gtk_overlay_add_overlay (GTK_OVERLAY (imageoverlay), quake2reckon);
+	gtk_overlay_add_overlay (GTK_OVERLAY (imageoverlay), quake2);
 	gtk_overlay_add_overlay (GTK_OVERLAY (imageoverlay), quakedop);
 	gtk_overlay_add_overlay (GTK_OVERLAY (imageoverlay), quakedoe);
 	gtk_overlay_add_overlay (GTK_OVERLAY (imageoverlay), quakearmagon);
@@ -267,7 +297,7 @@ void	run_game(char *GAME)
 	g_autoptr(GError) error = NULL;
 	gint child_stdout, child_stderr;
 
-	if (strlen(home) > 31 || strlen(arguments) > 63 || strlen(GAME) > 31) {
+	if (strlen(home) > 31 || strlen(arguments) > 95 || strlen(GAME) > 31) {
 		display_error("#define values exceed max length in header file..");
 		return;
 	}
@@ -293,8 +323,8 @@ void	run_game(char *GAME)
 	//	printf("%s\n", argv[i]);  
 	// }
 
-	// dhewm3 is noisy - ignore STDERR on GUI
-	if (strcmp(GAME, "dhewm3") == 0 ) { 
+	// noisy JACK server - ignore STDERR on GUI
+	if (strcmp(GAME, "dhewm3") == 0 || strcmp(home, "/usr/lib/yamagi-quake2") == 0) { 
 		g_spawn_async_with_pipes(home, argv, NULL, G_SPAWN_DO_NOT_REAP_CHILD, NULL,
 			NULL, &child_pid, NULL, &child_stdout, NULL, &error);
 	} else {
