@@ -101,8 +101,8 @@
 #define         ARGS_QUAKE2M2    "+set basedir /usr/share/games/quake2 +set vid_gamma 1.400000 +set game rogue"
 #define         NAME_QUAKE2M2    "Quake II: Ground Zero"
 
-// Not used - CTF online only
+// CTF with Bots
 #define         HOME_QUAKE2CTF    "/usr/lib/yamagi-quake2"
 #define         BINARY_QUAKE2CTF  "quake2"
-#define         ARGS_QUAKE2CTF    "+set basedir /usr/share/games/quake2 +set vid_gamma 1.400000 +set game ctf +map q2ctf1"
-#define         NAME_QUAKE2CTF    "Quake II: Capture the Flag"
+#define         ARGS_QUAKE2CTF    "+set basedir /usr/share/games/quake2 +set vid_gamma 1.400000 +set game 3zb2 +set deathmatch 1 +set autospawn 1 +exec ctf.cfg"
+#define         NAME_QUAKE2CTF    "Quake II: Bot CTF"
