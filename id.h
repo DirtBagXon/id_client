@@ -106,3 +106,9 @@
 #define         BINARY_QUAKE2CTF  "quake2"
 #define         ARGS_QUAKE2CTF    "+set basedir /usr/share/games/quake2 +set vid_gamma 1.400000 +set game 3zb2 +set deathmatch 1 +set autospawn 1 +exec ctf.cfg"
 #define         NAME_QUAKE2CTF    "Quake II: Bot CTF"
+
+// DM with Bots
+#define         HOME_QUAKE2DM     "/usr/lib/yamagi-quake2"
+#define         BINARY_QUAKE2DM   "quake2"
+#define         ARGS_QUAKE2DM     "+set basedir /usr/share/games/quake2/ +set vid_gamma 1.400000 +set game 3zb2 +set deathmatch 1 +exec game.cfg"
+#define         NAME_QUAKE2DM     "Quake II: Bot Deathmatch"

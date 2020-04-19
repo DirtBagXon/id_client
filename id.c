@@ -58,6 +58,7 @@ GtkWidget       *quake2;
 GtkWidget       *quake2reckon;
 GtkWidget       *quake2zero;
 GtkWidget       *quake2ctf;
+GtkWidget       *quake2dm;
 
 static gboolean window_background(GtkWidget *widget, cairo_t *cr, gpointer data);
 void	on_destroy();
@@ -103,6 +104,8 @@ GtkWidget * init_tree()
 	gtk_list_store_set(liststore, &treeiter, 0, NAME_QUAKE2M2, -1);
 	gtk_list_store_append(liststore, &treeiter);
 	gtk_list_store_set(liststore, &treeiter, 0, NAME_QUAKE2CTF, -1);
+	gtk_list_store_append(liststore, &treeiter);
+	gtk_list_store_set(liststore, &treeiter, 0, NAME_QUAKE2DM, -1);
 
 	GtkWidget *treeview = gtk_tree_view_new_with_model(GTK_TREE_MODEL(liststore));
 	GtkCellRenderer *cellrenderertext = gtk_cell_renderer_text_new();
@@ -192,6 +195,11 @@ static void selected(GtkTreeView *tree_view, GtkTreePath *path, GtkTreeViewColum
 		sprintf(home, HOME_QUAKE2CTF);
 		sprintf(arguments, ARGS_QUAKE2CTF);
 		graphic = quake2ctf;
+	} else if (strcmp(string, NAME_QUAKE2DM) == 0) {
+		sprintf(binary, BINARY_QUAKE2DM);
+		sprintf(home, HOME_QUAKE2DM);
+		sprintf(arguments, ARGS_QUAKE2DM);
+		graphic = quake2dm;
 	} else {
 		sprintf(binary, BINARY_DOOM);
 		sprintf(home, HOME_DOOM);
@@ -206,6 +214,7 @@ void	image_overlay()
 {
 	// Reverse order of init_tree()
 	// top image goes last..
+	quake2dm = gtk_image_new_from_resource("/id/images/quake2dm.jpg");
 	quake2ctf = gtk_image_new_from_resource("/id/images/quake2ctf.jpg");
 	quake2zero = gtk_image_new_from_resource("/id/images/quake2zero.jpg");
 	quake2reckon = gtk_image_new_from_resource("/id/images/quake2reckon.jpg");
@@ -222,6 +231,7 @@ void	image_overlay()
 	doom2 = gtk_image_new_from_resource("/id/images/doom2.jpg");
 	doom = gtk_image_new_from_resource("/id/images/doom.jpg");
 
+	gtk_overlay_add_overlay (GTK_OVERLAY (imageoverlay), quake2dm);
 	gtk_overlay_add_overlay (GTK_OVERLAY (imageoverlay), quake2ctf);
 	gtk_overlay_add_overlay (GTK_OVERLAY (imageoverlay), quake2zero);
 	gtk_overlay_add_overlay (GTK_OVERLAY (imageoverlay), quake2reckon);
