@@ -58,6 +58,7 @@ GtkWidget       *quake2;
 GtkWidget       *quake2reckon;
 GtkWidget       *quake2zero;
 GtkWidget       *quake2ctf;
+GtkWidget       *quake2zm;
 GtkWidget       *quake2dm;
 
 static gboolean window_background(GtkWidget *widget, cairo_t *cr, gpointer data);
@@ -66,7 +67,7 @@ void	image_overlay();
 void	run_game(char *GAME);
 char	binary[64] = BINARY_DOOM;
 char	home[128] = HOME_DOOM;
-char	arguments[128] = ARGS_DOOM;
+char	arguments[150] = ARGS_DOOM;
 
 
 GtkWidget * init_tree()
@@ -104,6 +105,8 @@ GtkWidget * init_tree()
 	gtk_list_store_set(liststore, &treeiter, 0, NAME_QUAKE2M2, -1);
 	gtk_list_store_append(liststore, &treeiter);
 	gtk_list_store_set(liststore, &treeiter, 0, NAME_QUAKE2CTF, -1);
+	gtk_list_store_append(liststore, &treeiter);
+	gtk_list_store_set(liststore, &treeiter, 0, NAME_QUAKE2ZM, -1);
 	gtk_list_store_append(liststore, &treeiter);
 	gtk_list_store_set(liststore, &treeiter, 0, NAME_QUAKE2DM, -1);
 
@@ -200,6 +203,11 @@ static void selected(GtkTreeView *tree_view, GtkTreePath *path, GtkTreeViewColum
 		sprintf(home, HOME_QUAKE2DM);
 		sprintf(arguments, ARGS_QUAKE2DM);
 		graphic = quake2dm;
+	} else if (strcmp(string, NAME_QUAKE2ZM) == 0) {
+		sprintf(binary, BINARY_QUAKE2ZM);
+		sprintf(home, HOME_QUAKE2ZM);
+		sprintf(arguments, ARGS_QUAKE2ZM);
+		graphic = quake2zm;
 	} else {
 		sprintf(binary, BINARY_DOOM);
 		sprintf(home, HOME_DOOM);
@@ -215,6 +223,7 @@ void	image_overlay()
 	// Reverse order of init_tree()
 	// top image goes last..
 	quake2dm = gtk_image_new_from_resource("/id/images/quake2dm.jpg");
+	quake2zm = gtk_image_new_from_resource("/id/images/quake2zig.jpg");
 	quake2ctf = gtk_image_new_from_resource("/id/images/quake2ctf.jpg");
 	quake2zero = gtk_image_new_from_resource("/id/images/quake2zero.jpg");
 	quake2reckon = gtk_image_new_from_resource("/id/images/quake2reckon.jpg");
@@ -232,6 +241,7 @@ void	image_overlay()
 	doom = gtk_image_new_from_resource("/id/images/doom.jpg");
 
 	gtk_overlay_add_overlay (GTK_OVERLAY (imageoverlay), quake2dm);
+	gtk_overlay_add_overlay (GTK_OVERLAY (imageoverlay), quake2zm);
 	gtk_overlay_add_overlay (GTK_OVERLAY (imageoverlay), quake2ctf);
 	gtk_overlay_add_overlay (GTK_OVERLAY (imageoverlay), quake2zero);
 	gtk_overlay_add_overlay (GTK_OVERLAY (imageoverlay), quake2reckon);
@@ -317,7 +327,7 @@ void	run_game(char *GAME)
 	g_autoptr(GError) error = NULL;
 	gint child_stdout, child_stderr;
 
-	if (strlen(home) > 31 || strlen(arguments) > 127 || strlen(GAME) > 31) {
+	if (strlen(home) > 31 || strlen(arguments) > 149 || strlen(GAME) > 31) {
 		display_error("#define values exceed max length in header file..");
 		return;
 	}
