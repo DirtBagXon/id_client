@@ -319,24 +319,28 @@ static gboolean window_background(GtkWidget *widget, cairo_t *cr, gpointer data)
 
 void	run_game(char *GAME)
 {
-	char cmd[65];
+	int homelen = strlen(home);
+	int gamelen = strlen(GAME);
+	char cmd[homelen + gamelen + 1];
 	char delim[] = " ";
 	int count = 1;
 	GPid child_pid;
 	gchar * argv[32] = {};
+	char runtime[sizeof(arguments)];
 	g_autoptr(GError) error = NULL;
 	gint child_stdout, child_stderr;
 
-	if (strlen(home) > 31 || strlen(arguments) > 149 || strlen(GAME) > 31) {
+	if (homelen > 31 || strlen(arguments) > 149 || gamelen > 31) {
 		display_error("#define values exceed max length in header file..");
 		return;
 	}
 
+	sprintf(runtime, "%s", arguments);
 	sprintf(cmd, "%s/%s", home, GAME);
 
 	argv[0] = cmd;
 
-	char *ptr = strtok(arguments, delim);
+	char *ptr = strtok(runtime, delim);
 
 	while(ptr != NULL)
 	{
