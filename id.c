@@ -358,7 +358,7 @@ void	run_game(char *GAME)
 	// }
 
 	// noisy JACK server - ignore STDERR on GUI
-	if (strcmp(GAME, "dhewm3") == 0 || strcmp(home, "/usr/lib/yamagi-quake2") == 0) { 
+	if (strcmp(GAME, "dhewm3") == 0 || strcmp(GAME, "doom") == 0 || strcmp(home, "/usr/lib/yamagi-quake2") == 0) {
 		g_spawn_async_with_pipes(home, argv, NULL, G_SPAWN_DO_NOT_REAP_CHILD, NULL,
 			NULL, &child_pid, NULL, &child_stdout, NULL, &error);
 	} else {
