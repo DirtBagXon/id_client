@@ -6,4 +6,11 @@
   background: rgba(169,3,41,1);
   background: radial-gradient(ellipse at center, rgba(169,3,41,1) 8%, rgba(169,3,41,1) 12%, rgba(143,2,34,1) 23%, rgba(13,2,0,1) 63%, rgba(13,2,0,1) 83%);
 }
-treeview.view:hover { color: #8c150d; background: #bab8b8; font-weight: normal; text-shadow: none; box-shadow: none; }
+
+treeview.view:hover{
+  color: #8c150d;
+  background: #bab8b8;
+  font-weight: normal;
+  text-shadow: none;
+  box-shadow: none;
+}

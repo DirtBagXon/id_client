@@ -104,7 +104,7 @@ void watch_game(GPid pid, gint status, gpointer user_data)
         g_autoptr(GError) game_error = NULL;
         gint fd = GPOINTER_TO_INT(user_data);
 
-        sprintf(err_line, check_fd(fd));
+        sprintf(err_line, "%s", check_fd(fd));
         if (strstr(err_line, "EOF") == NULL) display_error(err_line);
 
         if (g_spawn_check_exit_status (status, &game_error) != TRUE ) {
