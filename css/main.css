@@ -14,3 +14,12 @@ treeview.view:hover{
   text-shadow: none;
   box-shadow: none;
 }
+
+#start:hover{
+  color: #000000;
+  background: #8c150d;
+  font-weight: normal;
+  border-color: black;
+  text-shadow: none;
+  box-shadow: none;
+}

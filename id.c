@@ -277,6 +277,7 @@ int main(int argc, char *argv[])
 	g_object_unref(builder);
 
 	loadResCSS("id/css/main.css");
+	gtk_widget_set_name(start, "start");
 	gtk_widget_set_name(logobutton, "logo_button");
 
 	gtk_window_set_keep_above (GTK_WINDOW(window), FALSE);
