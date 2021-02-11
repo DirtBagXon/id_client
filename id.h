@@ -30,6 +30,11 @@
 #define         ARGS_DOOM2    	"-iwad doom2.wad"
 #define         NAME_DOOM2    	"Doom II"
 
+#define         HOME_DOOM64    	"/usr/local/bin"
+#define         BINARY_DOOM64  	"doom64ex"
+#define         ARGS_DOOM64    	" "
+#define         NAME_DOOM64    	"Doom 64"
+
 /* TNT Evilution */
 #define         HOME_DOOMTNT   	"/usr/games"
 #define         BINARY_DOOMTNT 	"doom"

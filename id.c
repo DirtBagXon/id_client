@@ -45,6 +45,7 @@ GtkWidget 	* init_tree();
 
 GtkWidget       *doom;
 GtkWidget       *doom2;
+GtkWidget       *doom64;
 GtkWidget       *tnt;
 GtkWidget       *plutonia;
 GtkWidget       *doom3;
@@ -79,6 +80,8 @@ GtkWidget * init_tree()
 	gtk_list_store_set(liststore, &treeiter, 0,NAME_DOOM, -1);
 	gtk_list_store_append(liststore, &treeiter);
 	gtk_list_store_set(liststore, &treeiter, 0,NAME_DOOM2, -1);
+	gtk_list_store_append(liststore, &treeiter);
+	gtk_list_store_set(liststore, &treeiter, 0,NAME_DOOM64, -1);
 	gtk_list_store_append(liststore, &treeiter);
 	gtk_list_store_set(liststore, &treeiter, 0, NAME_DOOMTNT, -1);
 	gtk_list_store_append(liststore, &treeiter);
@@ -133,6 +136,11 @@ static void selected(GtkTreeView *tree_view, GtkTreePath *path, GtkTreeViewColum
 		sprintf(home, HOME_DOOM2);
 		sprintf(arguments, ARGS_DOOM2);
 		graphic = doom2;
+	} else if (strcmp(string, NAME_DOOM64) == 0) {
+		sprintf(binary, BINARY_DOOM64);
+		sprintf(home, HOME_DOOM64);
+		sprintf(arguments, ARGS_DOOM64);
+		graphic = doom64;
 	} else if (strcmp(string, NAME_DOOMTNT) == 0) {
 		sprintf(binary, BINARY_DOOMTNT);
 		sprintf(home, HOME_DOOMTNT);
@@ -238,6 +246,7 @@ void	image_overlay()
 	plutonia = gtk_image_new_from_resource("/id/images/plutonia.jpg");
 	tnt = gtk_image_new_from_resource("/id/images/tnt.jpg");
 	doom2 = gtk_image_new_from_resource("/id/images/doom2.jpg");
+	doom64 = gtk_image_new_from_resource("/id/images/doom64.jpg");
 	doom = gtk_image_new_from_resource("/id/images/doom.jpg");
 
 	gtk_overlay_add_overlay (GTK_OVERLAY (imageoverlay), quake2dm);
@@ -255,6 +264,7 @@ void	image_overlay()
 	gtk_overlay_add_overlay (GTK_OVERLAY (imageoverlay), doom3);
 	gtk_overlay_add_overlay (GTK_OVERLAY (imageoverlay), plutonia);
 	gtk_overlay_add_overlay (GTK_OVERLAY (imageoverlay), tnt);
+	gtk_overlay_add_overlay (GTK_OVERLAY (imageoverlay), doom64);
 	gtk_overlay_add_overlay (GTK_OVERLAY (imageoverlay), doom2);
 	gtk_overlay_add_overlay (GTK_OVERLAY (imageoverlay), doom);
 }
@@ -359,7 +369,9 @@ void	run_game(char *GAME)
 	// }
 
 	// noisy JACK server - ignore STDERR on GUI
-	if (strcmp(GAME, "dhewm3") == 0 || strcmp(GAME, "doom") == 0 || strcmp(home, "/usr/lib/yamagi-quake2") == 0) {
+	if (strcmp(GAME, "dhewm3") == 0 || strcmp(GAME, "doom") == 0 \
+			|| (strcmp(GAME, "doom64ex") == 0) \
+			|| strcmp(home, "/usr/lib/yamagi-quake2") == 0) {
 		g_spawn_async_with_pipes(home, argv, NULL, G_SPAWN_DO_NOT_REAP_CHILD, NULL,
 			NULL, &child_pid, NULL, &child_stdout, NULL, &error);
 	} else {
